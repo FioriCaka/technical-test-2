@@ -24,7 +24,7 @@ export default function ProjectView() {
   useEffect(() => {
     (async () => {
       const { data: u } = await api.get(`/project/${id}`);
-      setProject(u);
+      setProject(u.at(0));
     })();
   }, []);
 
@@ -196,7 +196,7 @@ const Activities = ({ project }) => {
                         if (!a.detail[i]) return acc;
                         return acc + a.detail[i].value;
                       }, 0);
-                      return <Field key={i} value={v} disabled />;
+                      return <Field key={i} value={v} />;
                     })}
                   </tr>
                   {activities
