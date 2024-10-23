@@ -46,6 +46,8 @@ const Detail = ({ user }) => {
         try {
           await api.put(`/user/${user._id}`, values);
           toast.success("Updated!");
+          history.push(`/user`);
+          
         } catch (e) {
           console.log(e);
           toast.error("Some Error!");
@@ -56,7 +58,7 @@ const Detail = ({ user }) => {
           <React.Fragment>
             <div className="flex justify-between flex-wrap mt-4">
               <div className="w-full md:w-[260px] mt-[10px] md:mt-0 ">
-                <div className="text-[14px] text-[#212325] font-medium	">Name</div>
+                <div className="text-[14px] text-[#212325] font-medium  ">Name</div>
                 <input
                   className="projectsInput text-[14px] font-normal text-[#212325] bg-[#F9FBFD] rounded-[10px]"
                   name="name"

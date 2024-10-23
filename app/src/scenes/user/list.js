@@ -212,9 +212,18 @@ const FilterStatus = ({ filter, setFilter }) => {
 
 const UserCard = ({ hit, projects }) => {
   const history = useHistory();
+
+  async function deleteData() {
+    const confirm = window.confirm("Are you sure ?");
+    if (!confirm) return
+    await api.remove(`/user/${hit._id}`);
+    toast.success("successfully removed!");
+    history.push(`/user`);
+    location.reload()
+  }
+
   return (
     <div
-      onClick={() => history.push(`/user/${hit._id}`)}
       className="flex flex-col bg-white hover:-translate-y-1 transition duration-100 shadow-sm ease-in cursor-pointer  relative rounded-[16px] pb-4 overflow-hidden">
       <div className="relative flex items-start justify-center pt-6 pb-2">
         <div className="absolute top-0 left-0 w-full h-full z-10 overflow-hidden">
@@ -245,10 +254,19 @@ const UserCard = ({ hit, projects }) => {
         </div>
       </div>
       {/* infos */}
-      <div className="flex flex-col flex-1 justify-between">
-        <div className="flex flex-col items-center text-center my-4 space-y-1">
+      <div className="flex flex-col flex-1 justify-between my-4">
+        <div className="flex flex-col items-center text-center space-y-1">
           <p className="font-semibold text-lg">{hit.name}</p>
         </div>
+      </div>
+    
+      <div className="flex nowrap justify-evenly items-end">
+        <button className="mr-2 bg-blue-600 text-[16px] font-medium text-[#FFFFFF] py-[12px] px-[22px] rounded-[10px]" type="button" onClick={() => history.push(`/user/${hit._id}`)}>
+          Update
+        </button>
+        <button className="ml-2 bg-[#F43F5E] text-[16px] font-medium text-[#FFFFFF] py-[12px] px-[22px] rounded-[10px]" type="button" onClick={deleteData}>
+          Delete
+        </button>
       </div>
     </div>
   );
